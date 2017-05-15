@@ -1,1 +1,1 @@
-include ':app', ':customview', ':nfcdemo', ':retrofitdemotest'
+include ':app', ':customview', ':calendarselectdemo',':retrofitdemotest', ':testdemo'

@@ -9,7 +9,10 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/calendarselectdemo" />
             <option value="$PROJECT_DIR$/customview" />
+            <option value="$PROJECT_DIR$/retrofitdemotest" />
+            <option value="$PROJECT_DIR$/testdemo" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
