@@ -15,7 +15,9 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private WebView mWebView;
-    private final  String URL="http://www.tuicool.com/articles/IVfmuyZ";
+//    private final  String URL="http://www.tuicool.com/articles/IVfmuyZ";
+//    private final  String URL="http://www.yujingceping.com/login.html";
+    private final  String URL="http://www.yujingceping.com/yitaifront/pages/front/myCenter/person.html#/evaluation-query?ts=1495696035410 ";
     private String TAG="MainActivity";
     private String APP_CACHE_DIRNAME="/webcache";
 
