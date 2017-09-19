@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/customview/customview.iml" filepath="$PROJECT_DIR$/customview/customview.iml" />
       <module fileurl="file://$PROJECT_DIR$/nfcdemo/nfcdemo.iml" filepath="$PROJECT_DIR$/nfcdemo/nfcdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/retrofitdemotest/retrofitdemotest.iml" filepath="$PROJECT_DIR$/retrofitdemotest/retrofitdemotest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sensordemo/sensordemo.iml" filepath="$PROJECT_DIR$/sensordemo/sensordemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/testdemo/testdemo.iml" filepath="$PROJECT_DIR$/testdemo/testdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/webtest/webtest.iml" filepath="$PROJECT_DIR$/webtest/webtest.iml" />
     </modules>
