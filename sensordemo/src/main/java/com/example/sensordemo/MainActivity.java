@@ -2,11 +2,16 @@ package com.example.sensordemo;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -26,58 +31,85 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         textView = (TextView) findViewById(R.id.textview);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        //获取所有可用的位置提供器
-        List<String> providers = locationManager.getProviders(true);
-        if (providers.contains(LocationManager.GPS_PROVIDER)) {
-            //如果是GPS
-            locationProvider = LocationManager.GPS_PROVIDER;
-        } else if (providers.contains(LocationManager.NETWORK_PROVIDER)) {
-            //如果是Network
-            locationProvider = LocationManager.NETWORK_PROVIDER;
-        } else {
-            Toast.makeText(this, "没有可用的位置提供器", Toast.LENGTH_SHORT).show();
+
+        //检验版本在6.0或SDK在23以上的权限申请
+        if (Build.VERSION.SDK_INT >= 23&&(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                && (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+                Intent intent = new Intent();
+                intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+              startActivityForResult(intent, 1);
+                Toast.makeText(this,"未授权",Toast.LENGTH_LONG).show();
             return;
+        }else {
+                    //获取所有可用的位置提供器
+            List<String> providers = locationManager.getProviders(true);
+            for (String s:providers) {
+                System.out.println(s);
+            }
+            if (providers.contains(LocationManager.GPS_PROVIDER)) {
+                //如果是GPS
+                locationProvider = LocationManager.GPS_PROVIDER;
+            } else if (providers.contains(LocationManager.NETWORK_PROVIDER)) {
+                //如果是Network
+                locationProvider = LocationManager.NETWORK_PROVIDER;
+            } else {
+                Toast.makeText(this, "没有可用的位置提供器", Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
         //获取Location
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+//        Location location = locationManager.getLastKnownLocation(locationProvider);
+        Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        if(location!=null){
+            //不为空,显示地理位置经纬度
+            showLocation(location);
         }
-        Location location = locationManager.getLastKnownLocation(locationProvider);
-//        if(location!=null){
-//            //不为空,显示地理位置经纬度
-//            showLocation(location);
-//        }
 //        //监视地理位置变化
-//        locationManager.requestLocationUpdates(locationProvider, 3000, 1, new LocationListener() {
-//            @Override
-//            public void onLocationChanged(Location location) {
-//
-//            }
-//
-//            @Override
-//            public void onStatusChanged(String s, int i, Bundle bundle) {
-//
-//            }
-//
-//            @Override
-//            public void onProviderEnabled(String s) {
-//
-//            }
-//
-//            @Override
-//            public void onProviderDisabled(String s) {
-//
-//            }
-//        });
+    locationManager.requestLocationUpdates(locationProvider, 3000, 1, new LocationListener() {
+        //当坐标改变时触发此函数，如果Provider传进相同的坐标，它就不会被触发
+        @Override
+            public void onLocationChanged(Location location) {
+            showLocation(location);
+            }
+            // Provider的状态在可用、暂时不可用和无服务三个状态直接切换时触发此函数
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+         // Provider被enable时触发此函数，比如GPS被打开
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+        // Provider被disable时触发此函数，比如GPS被关闭
+            @Override
+            public void onProviderDisabled(String s) {
+
+            }
+        });
 
 
 
 }
+
+    @Override
+     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+                 super.onActivityResult(requestCode, resultCode, data);
+                 if (requestCode == 1) {
+                        //版本23以上也就是M以上。判断权限是否生效
+                         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M&&checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED&& checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                     }else {
+                             Toast.makeText(this, "权限获取成功", Toast.LENGTH_SHORT).show();
+
+                         }
+                   }
+           }
+    private void showLocation(Location location) {
+        String so="维度：" + location.getLatitude() +"\n"
+                + "经度：" + location.getLongitude();
+        textView.setText(so);
+    }
 }
