@@ -9,11 +9,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         textView = (TextView) findViewById(R.id.textview);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
+        textView.setText("获取到locationMangaer");
         //检验版本在6.0或SDK在23以上的权限申请
         if (Build.VERSION.SDK_INT >= 23&&(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
                 && (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
@@ -45,23 +43,28 @@ public class MainActivity extends AppCompatActivity {
         }else {
                     //获取所有可用的位置提供器
             List<String> providers = locationManager.getProviders(true);
+            //下面是获取所有的手机权限。
+//           List<String> providers = locationManager.getAllProviders();
             for (String s:providers) {
                 System.out.println(s);
             }
+
             if (providers.contains(LocationManager.GPS_PROVIDER)) {
                 //如果是GPS
                 locationProvider = LocationManager.GPS_PROVIDER;
             } else if (providers.contains(LocationManager.NETWORK_PROVIDER)) {
                 //如果是Network
-                locationProvider = LocationManager.NETWORK_PROVIDER;
+                if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                    locationProvider = LocationManager.NETWORK_PROVIDER;
+                }
             } else {
                 Toast.makeText(this, "没有可用的位置提供器", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
-        //获取Location
-//        Location location = locationManager.getLastKnownLocation(locationProvider);
-        Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        //获取Location,现在可以获取到GPS
+       Location location = locationManager.getLastKnownLocation(locationProvider);
+//        Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         if(location!=null){
             //不为空,显示地理位置经纬度
             showLocation(location);
@@ -90,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Location还有解绑事件，应该是locationManager.removeUpdates(locationListener);
 
 
 }
