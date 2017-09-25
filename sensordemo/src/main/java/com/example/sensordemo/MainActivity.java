@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
-
+//http://www.jb51.net/article/52676.htm
 public class MainActivity extends AppCompatActivity {
 
     private TextView textView;
@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         textView = (TextView) findViewById(R.id.textview);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         textView.setText("获取到locationMangaer");
