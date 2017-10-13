@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
             //不为空,显示地理位置经纬度
             showLocation(location);
         }
-//        //监视地理位置变化
-    locationManager.requestLocationUpdates(locationProvider, 3000, 1, new LocationListener() {
+//        //监视地理位置变化，四个参数：第一个是驱动，第二个是时间，毫秒为单位，第三是距离以米为单位，第四个是监听
+    locationManager.requestLocationUpdates(locationProvider, 0, 0, new LocationListener() {
         //当坐标改变时触发此函数，如果Provider传进相同的坐标，它就不会被触发
         @Override
             public void onLocationChanged(Location location) {
