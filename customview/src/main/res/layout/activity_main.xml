@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.drcbse.customview.MainActivity">
 
-    <com.example.drcbse.customview.view.GuaCard2
+    <com.example.drcbse.customview.view.guaguacard.GuaCard2
         android:layout_width="match_parent" android:layout_height="match_parent"
         app:text="这是五百万大奖"
         app:textSize="30sp"

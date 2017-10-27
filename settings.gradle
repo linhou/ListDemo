@@ -1,1 +1,1 @@
-include ':app', ':customview', ':nfcdemo', ':retrofitdemotest', ':webtest', ':sensordemo'
+include ':app', ':customview', ':nfcdemo', ':retrofitdemotest', ':webtest', ':sensordemo', ':opensource', ':indexablelist', ':maps'

@@ -1,4 +1,4 @@
-package com.example.drcbse.customview.view;
+package com.example.drcbse.customview.view.guaguacard;
 
 import android.content.Context;
 import android.content.res.TypedArray;

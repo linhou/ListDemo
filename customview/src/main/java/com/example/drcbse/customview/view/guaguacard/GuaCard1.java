@@ -1,22 +1,28 @@
-package com.example.drcbse.customview.view;
+package com.example.drcbse.customview.view.guaguacard;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Xfermode;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.drcbse.customview.R;
+
 /**
  * Created by Lin.Hou on 2017/10/10.
- * 初步刮刮卡效果，这是类似一个画板的内容
+ *没有完善的刮刮卡
  */
 
-public class GuaCard extends View {
+public class GuaCard1 extends View {
 
     private Paint mOutPaint;
     private Path mPath; //绘制路径
@@ -26,20 +32,23 @@ public class GuaCard extends View {
     private int mLastX;
     private int mLastY;
 
-    public GuaCard(Context context) {
+    //设置底层图片
+    private Bitmap bitmap;
+
+    public GuaCard1(Context context) {
         this(context,null);
     }
 
-    public GuaCard(Context context, @Nullable AttributeSet attrs) {
+    public GuaCard1(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs,0);
     }
 
-    public GuaCard(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public GuaCard1(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         this(context, attrs, defStyleAttr,0);
 
     }
 
-    public GuaCard(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public GuaCard1(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
 
@@ -67,6 +76,10 @@ public class GuaCard extends View {
         mOutPaint.setStyle(Paint.Style.STROKE);
         mOutPaint.setStrokeWidth(20);
 
+        //绘制遮盖图层
+        mCanvas.drawColor(Color.parseColor("#c0c0c0"));
+        //mCanvas.drawColor(0x1111);
+
 
 
     }
@@ -75,6 +88,7 @@ public class GuaCard extends View {
     private void init() {
         mOutPaint=new Paint();
         mPath=new Path();
+        bitmap= BitmapFactory.decodeResource(getResources(),R.mipmap.t2);
     }
 
     //点击事件
@@ -108,13 +122,19 @@ public class GuaCard extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-      drawPath();
+        //在底层绘制图片
+        canvas.drawBitmap(bitmap,0,0,null);
+
+        drawPath();
         //super.onDraw(canvas);
         canvas.drawBitmap(mBitmap,0,0,null);
 
     }
 
     private void drawPath() {
+        //绘制擦除画笔
+        mOutPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
+
         mCanvas.drawPath(mPath,mOutPaint);
 
     }

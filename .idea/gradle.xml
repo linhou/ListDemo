@@ -10,7 +10,10 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/customview" />
+            <option value="$PROJECT_DIR$/indexablelist" />
+            <option value="$PROJECT_DIR$/maps" />
             <option value="$PROJECT_DIR$/nfcdemo" />
+            <option value="$PROJECT_DIR$/opensource" />
             <option value="$PROJECT_DIR$/retrofitdemotest" />
             <option value="$PROJECT_DIR$/sensordemo" />
             <option value="$PROJECT_DIR$/webtest" />

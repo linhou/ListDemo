@@ -1,0 +1,44 @@
+1.自由放大缩小
+2.双击放大和缩小
+3.放大后可以自由的移动
+4.处理Viewpager之间的时间冲突
+
+需要知识点：
+1.matrix  矩阵
+2.ScaleGestureDetector  多指触控
+3.GestureDetector  检测用户双击时的作用
+4.事件分发机制
+
+
+Matrix是一个3*3的矩阵，分别如下：
+
+xScale  xSkew xTrans
+ySkew  yScale yTrans
+0           0           0
+
+通过post的方式进行赋值。
+
+自由缩放的图片
+自定义ImangeView extends ImageView
+OnGlobalLayoutListener：获取图片的宽高
+    onAttachedToWindow：在这里面进行注册
+    onDetachedFromWindow：在下面函数中进行移除
+
+    ScaleGestureDeteDeterCtor
+        OnTouchListener
+        onTouch
+        onScale detector
+    -------------------------------------------------
+    自由移动
+
+    ----------------------------------------
+    双击放大  双击缩小
+      GestureDtector
+      postDelay+Runnable
+      ----------------------------------
+      和Viewpager的结合
+      放大后和Viewpager的左右滑动发生了冲突
+      判断冲突发生的原因：Vieapager屏蔽了子View的左右移动事件
+      处理：在Down以及MOVER如果宽或者高大于屏幕的宽度或者而高度，请求不被屏蔽
+          getParent().requestDisallowInterceptTouchEvent(true);
+

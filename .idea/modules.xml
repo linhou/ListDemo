@@ -6,7 +6,10 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/calendarselectdemo/calendarselectdemo.iml" filepath="$PROJECT_DIR$/calendarselectdemo/calendarselectdemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/customview/customview.iml" filepath="$PROJECT_DIR$/customview/customview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/indexablelist/indexablelist.iml" filepath="$PROJECT_DIR$/indexablelist/indexablelist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/maps/maps.iml" filepath="$PROJECT_DIR$/maps/maps.iml" />
       <module fileurl="file://$PROJECT_DIR$/nfcdemo/nfcdemo.iml" filepath="$PROJECT_DIR$/nfcdemo/nfcdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/opensource/opensource.iml" filepath="$PROJECT_DIR$/opensource/opensource.iml" />
       <module fileurl="file://$PROJECT_DIR$/retrofitdemotest/retrofitdemotest.iml" filepath="$PROJECT_DIR$/retrofitdemotest/retrofitdemotest.iml" />
       <module fileurl="file://$PROJECT_DIR$/sensordemo/sensordemo.iml" filepath="$PROJECT_DIR$/sensordemo/sensordemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/testdemo/testdemo.iml" filepath="$PROJECT_DIR$/testdemo/testdemo.iml" />
