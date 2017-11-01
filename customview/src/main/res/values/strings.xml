@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CustomView</string>
     <string name="title_activity_zoom_image">ZoomImageActivity</string>
+    <string name="title_activity_shader">ShaderActivity</string>
 </resources>

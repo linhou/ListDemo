@@ -352,13 +352,13 @@ public class ZoomImageView extends ImageView  implements ViewTreeObserver.OnGlob
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
                 //+0.01是避免细小的误差
-                if (rectF.width()>getWidth()+0.01||rectF.height()>getHeight()+0.01){
+                if (rectF.width()>getWidth()+0.01f||rectF.height()>getHeight()+0.01f){
                     getParent().requestDisallowInterceptTouchEvent(true);
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
 
-                if (rectF.width()>getWidth()+0.01||rectF.height()>getHeight()+0.01){
+                if (rectF.width()>getWidth()+0.01f||rectF.height()>getHeight()+0.01f){
                     getParent().requestDisallowInterceptTouchEvent(true);
                 }
 
@@ -391,6 +391,7 @@ public class ZoomImageView extends ImageView  implements ViewTreeObserver.OnGlob
                 mLastY=y;
                 break;
             case MotionEvent.ACTION_UP:
+
                 break;
             case MotionEvent.ACTION_CANCEL:
                 mLatsPointerCount=0;
